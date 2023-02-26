@@ -4,7 +4,9 @@ const app = express();
 const database = require("./configs/database/index");
 const fileUpload = require("express-fileupload");
 const bodyParser = require("body-parser");
+const { connectMQTT } = require("./utils/mqtt");
 const accountRouter = require("./routes/accountRouter");
+const balconyRouter = require("./routes/balconyRouter");
 
 
 const corsOpts = {
@@ -48,8 +50,15 @@ app.use(
 // database connect
 database.connect();
 
+// mqtt connect
+connectMQTT();
+
 
 app.use(accountRouter, function (req, res, next) {
+    next();
+});
+
+app.use(balconyRouter, function (req, res, next) {
     next();
 });
 
