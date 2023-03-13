@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const { connectMQTT } = require("./utils/mqtt");
 const accountRouter = require("./routes/accountRouter");
 const balconyRouter = require("./routes/balconyRouter");
-
+const plantRouter = require("./routes/plantRouter");
 
 const corsOpts = {
     origin: "*",
@@ -51,8 +51,7 @@ app.use(
 database.connect();
 
 // mqtt connect
-connectMQTT();
-
+connectMQTT("DUNGNA_SENDING");
 
 app.use(accountRouter, function (req, res, next) {
     next();
@@ -62,6 +61,9 @@ app.use(balconyRouter, function (req, res, next) {
     next();
 });
 
+app.use(plantRouter, function (req, res, next) {
+    next();
+});
 
 app.use("/", function (req, res, next) {
     res.status(200).json({
