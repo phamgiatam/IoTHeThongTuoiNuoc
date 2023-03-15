@@ -4,7 +4,7 @@ const Balcony = require("../models/Balcony");
 const balconyController = {
     createBalcony: async (req, res) => {
         try {
-            const { name } = req.body;
+            const { name, balconyId } = req.body;
             const accessToken = req.headers.authorization.split(" ")[1];
 
             const balcony = await Balcony.findOne({ name: name });
@@ -28,9 +28,11 @@ const balconyController = {
             } else {
                 const newBalcony = new Balcony({
                     account: account._id,
+                    balconyId: balconyId,
                     name: name,
                     humidity: 0,
                     temperature: 0,
+                    image: "https://i.pinimg.com/564x/05/fc/9d/05fc9d39ac383eea6b85c0321771c326.jpg",
                 });
                 await newBalcony.save();
 
@@ -60,7 +62,7 @@ const balconyController = {
                 });
             }
 
-            const balconies = await Balcony.find();
+            const balconies = await Balcony.find({ account: account._id });
 
             return res.send({
                 result: "success",
@@ -89,10 +91,72 @@ const balconyController = {
                 });
             }
 
-            const balcony = await Balcony.findOne({ _id: balconyId }).populate({ path: "plants" });
+            const balcony = await Balcony.findOne({ balconyId: balconyId });
             res.status(200).send({
                 result: "success",
                 balcony: balcony,
+            });
+        } catch (error) {
+            res.status(404).send({
+                result: "failed",
+                message: error.message,
+            });
+        }
+    },
+    update: async (req, res) => {
+        try {
+            const { balconyId, image, name } = req.body;
+
+            const accessToken = req.headers.authorization.split(" ")[1];
+            const account = await Account.findOne({
+                accessToken: accessToken,
+            });
+
+            if (!account) {
+                return res.status(403).send({
+                    result: "failed",
+                    message: "Không đủ quyền truy cập",
+                });
+            }
+
+            const balcony = await Balcony.findOneAndUpdate(
+                { balconyId: balconyId },
+                {
+                    name: name,
+                    image: image,
+                },
+                { new: true }
+            );
+            res.status(200).send({
+                result: "success",
+                balcony: balcony,
+            });
+        } catch (error) {
+            res.status(404).send({
+                result: "failed",
+                message: error.message,
+            });
+        }
+    },
+    delete: async (req, res) => {
+        try {
+            const { balconyId } = req.query;
+
+            const accessToken = req.headers.authorization.split(" ")[1];
+            const account = await Account.findOne({
+                accessToken: accessToken,
+            });
+
+            if (!account) {
+                return res.status(403).send({
+                    result: "failed",
+                    message: "Không đủ quyền truy cập",
+                });
+            }
+
+            await Balcony.findOneAndDelete({ balconyId: balconyId });
+            res.status(200).send({
+                result: "success",
             });
         } catch (error) {
             res.status(404).send({

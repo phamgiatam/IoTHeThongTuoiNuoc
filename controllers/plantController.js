@@ -4,7 +4,7 @@ const Plant = require("../models/Plant");
 const mqtt = require("mqtt");
 const utils = require("../utils");
 const broker = "mqtt://broker.mqttdashboard.com:1883";
-const topic = "TOPIC_1";
+const topic = "DUNGNA_RECEIVING";
 const options = {};
 
 const client = mqtt.connect(broker, options);

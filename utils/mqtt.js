@@ -9,8 +9,9 @@ const options = {
     //     // Auth
     //   // clientId: 'c373f1a2-3766-4598-b84a-cf401621663e',
 };
-const broker = "mqtt://broker.mqttdashboard.com:1883";
-// const topic = 'DUNGNA';
+const broker = "";
+// Name of the broker
+// const topic = '';
 
 const connectMQTT = (topic) => {
     try {

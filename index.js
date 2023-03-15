@@ -51,7 +51,8 @@ app.use(
 database.connect();
 
 // mqtt connect
-connectMQTT("DUNGNA_SENDING");
+connectMQTT("");
+// TOPPIC MQTT broker
 
 app.use(accountRouter, function (req, res, next) {
     next();
