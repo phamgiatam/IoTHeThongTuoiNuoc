@@ -1,9 +1,10 @@
-const Account = require("../models/Account");
+// const Account = require("../models/Account");
 const utils = require("../utils");
 const moment = require("moment");
 const { generateRandomStr, sha256 } = require("../utils");
 const sendEmail = require("../utils/nodeMailer");
 const jwt = require("jsonwebtoken");
+const Account = require("../models/Account");
 
 const accountController = {
     signIn: async (req, res) => {
@@ -115,7 +116,7 @@ const accountController = {
         } catch (err) {
             res.status(500).send({
                 result: "failed",
-                message: err,
+                message: err.message
             });
         }
     },

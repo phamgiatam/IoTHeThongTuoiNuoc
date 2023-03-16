@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const plant = new mongoose.Schema(
+const balcony = new mongoose.Schema(
     {
         balconyId: String,
         plantId: String,
@@ -16,4 +16,4 @@ const plant = new mongoose.Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("plant", plant);
+module.exports = mongoose.model("balcony", balcony);
