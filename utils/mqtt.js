@@ -9,9 +9,8 @@ const options = {
     //     // Auth
     //   // clientId: 'c373f1a2-3766-4598-b84a-cf401621663e',
 };
-const broker = "";
-// Name of the broker
-// const topic = '';
+const broker = "mqtt://broker.mqttdashboard.com:1883";
+// const topic = 'IOTUET';
 
 const connectMQTT = (topic) => {
     try {
@@ -32,47 +31,5 @@ const connectMQTT = (topic) => {
         console.log(err);
     }
 };
-// module.exports = {connectMQTT}
-// var mqtt = require("mqtt");
-
-// var options = {
-//     host: "5bba22212f8b4b36ac41f907dba4cc42.s2.eu.hivemq.cloud",
-//     port: 8883,
-//     protocol: "mqtts",
-//     username: "DUNGNA",
-//     password: "nguyenanhdung28",
-// };
-
-// const connectMQTT = (topic) => {
-//     try {
-//         // initialize the MQTT client
-//         var client = mqtt.connect(options);
-
-//         // setup the callbacks
-//         client.on("connect", function () {
-//             console.log("Connected to MQTT");
-//         });
-
-//         client.on("error", function (error) {
-//             console.log(error.message);
-//         });
-
-//         client.on("message", function (tp, message) {
-//             // called each time a message is received
-//             console.log("Received message:", topic, message.toString());
-//         });
-
-//         client.subscribe(topic);
-
-//         // publish message 'Hello' to topic 'my/test/topic'
-//         // client.publish("my/test/topic", "Hello");
-//     } catch (error) {
-//         console.log({
-//             result: "failed",
-//             message: "connect to mqtt broker failed",
-//             reason: error.message,
-//         });
-//     }
-// };
 
 module.exports = { connectMQTT };

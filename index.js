@@ -51,8 +51,7 @@ app.use(
 database.connect();
 
 // mqtt connect
-connectMQTT("");
-// TOPPIC MQTT broker
+connectMQTT("IOTUET_SENDING");
 
 app.use(accountRouter, function (req, res, next) {
     next();

@@ -4,38 +4,12 @@ const Plant = require("../models/Plant");
 const mqtt = require("mqtt");
 const utils = require("../utils");
 const broker = "mqtt://broker.mqttdashboard.com:1883";
-const topic = "DUNGNA_RECEIVING";
+const topic = "IOTUET_RECEIVING";
 const options = {};
 
 const client = mqtt.connect(broker, options);
 
 const plantController = {
-    // create: async (req, res) => {
-    //     try {
-    //         const plants = await Plant.find({ balconyId: "EC:FA:BC:28:0E:66" });
-    //         // const plant = plants.find((item) => {
-    //         //     console.log(item.plantId);
-    //         //     return item.plantId === "EC:FA:BC:28:0E:660";
-    //         // });
-    //         // console.log(plant);
-    //         let testArr = [];
-    //         for (let i = 0; i < 15; i++) {
-    //             const havePlant = plants.find((item) => {
-    //                 return item.plantId == `EC:FA:BC:28:0E:66${i}`;
-    //             });
-    //             testArr = testArr.concat(havePlant);
-    //         }
-    //         res.send({
-    //             plants: plants,
-    //             havePlant: testArr,
-    //         });
-    //     } catch (error) {
-    //         res.status(404).json({
-    //             result: "failed",
-    //             message: error.message,
-    //         });
-    //     }
-    // },
 
     control: async (req, res) => {
         try {

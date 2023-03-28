@@ -8,17 +8,17 @@
 #include <string>
 
 // địa chi wifi
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "OkeOke";
+const char* password = "88888888";
 
 // MQTT Broker
 const char* mqtt_server = "broker.mqttdashboard.com";
 const int mqtt_port = 1883;
-const char* mqtt_user = "";
-const char* mqtt_password = "";
-const char* sending_topic = "";
-const char* receiving_topic = "";
-const char* mqtt_topic = "";
+const char* mqtt_user = "okeoke";
+const char* mqtt_password = "oke";
+const char* sending_topic = "IOTUET_SENDING";
+const char* receiving_topic = "IOTUET_RECEIVING";
+const char* mqtt_topic = "IOTUET";
 const String sensorId = WiFi.macAddress();
 
 
