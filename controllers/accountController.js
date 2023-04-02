@@ -16,9 +16,9 @@ const accountController = {
                     accessToken: accessToken,
                 });
                 if (!account) {
-                    return res.send({
+                    return res.status(400).send({
                         result: "failed",
-                        message: "Không đủ quyền truy cập",
+                        reason: "Không đủ quyền truy cập",
                     });
                 }
 
@@ -35,7 +35,7 @@ const accountController = {
             if (!account) {
                 return res.status(404).json({
                     result: "failed",
-                    message: "Tài khoản không tồn tại",
+                    reason: "Tài khoản không tồn tại",
                 });
             }
 
@@ -45,7 +45,7 @@ const accountController = {
             if (!validPassword) {
                 return res.status(404).json({
                     result: "failed",
-                    message: "Sai mật khẩu",
+                    reason: "Sai mật khẩu",
                 });
             }
 
@@ -76,7 +76,7 @@ const accountController = {
         } catch (err) {
             res.status(500).json({
                 result: "failed",
-                error: err.message,
+                reason: err.message,
             });
         }
     },
@@ -89,9 +89,9 @@ const accountController = {
             });
 
             if (account) {
-                return res.send({
+                return res.status(400).send({
                     result: "failed",
-                    message: "Tài khoản đã tồn tại",
+                    reason: "Tài khoản đã tồn tại",
                 });
             }
 
@@ -115,7 +115,7 @@ const accountController = {
         } catch (err) {
             res.status(500).send({
                 result: "failed",
-                message: err.message
+                reason: err.message
             });
         }
     },
@@ -154,9 +154,9 @@ const accountController = {
             });
 
             if (!account) {
-                return res.send({
+                return res.status(400).send({
                     result: "failed",
-                    message: "email không hợp lệ",
+                    reason: "email không hợp lệ",
                 });
             }
             var random = 100000 + Math.random() * 900000;
@@ -189,9 +189,9 @@ const accountController = {
                 // expirationDate: moment(expirationDate).toDate(),
             });
         } catch (error) {
-            res.send({
+            res.status(400).send({
                 result: "failed",
-                message: error,
+                reason: error,
             });
         }
     },
@@ -209,7 +209,7 @@ const accountController = {
             const hashedPassword = utils.sha256(newPassword);
 
             if (!account) {
-                return res.send({
+                return res.status(400).send({
                     result: "failed",
                     message: "Đổi mật khẩu không thành công",
                 });
@@ -232,7 +232,7 @@ const accountController = {
                 });
             }
         } catch (error) {
-            res.send({
+            res.status(400).send({
                 result: "failed",
                 message: error,
             });
@@ -258,17 +258,17 @@ const accountController = {
                         message: "Đổi mật khẩu thành công",
                     });
                 }
-                return res.send({
+                return res.status(400).send({
                     result: "failed",
-                    message: "Mật khẩu cũ không chính xác",
+                    reason: "Mật khẩu cũ không chính xác",
                 });
             }
-            return res.send({
+            return res.status(400).send({
                 result: "faled",
-                message: "Sai email",
+                reason: "Sai email",
             });
         } catch (err) {
-            res.send({
+            res.status(400).send({
                 result: "faled",
                 message: err,
             });
