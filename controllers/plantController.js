@@ -21,9 +21,9 @@ const plantController = {
             });
 
             if (!account) {
-                return res.send({
+                return res.status(400).send({
                     result: "failed",
-                    message: "Không đủ quyền truy cập",
+                    reason: "Không đủ quyền truy cập",
                 });
             }
 
@@ -37,12 +37,12 @@ const plantController = {
                 }),
                 (err) => {
                     if (err) {
-                        return res.send({
+                        return res.status(400).send({
                             result: "failed",
-                            message: err.message,
+                            reason: err.message,
                         });
                     } else {
-                        return res.send({
+                        return res.status(400).send({
                             result: "success",
                             message: "Yêu cầu đã được gửi",
                         });
@@ -52,7 +52,7 @@ const plantController = {
         } catch (error) {
             res.status(404).json({
                 result: "failed",
-                message: error.message,
+                reason: error.message,
             });
         }
     },
@@ -125,9 +125,9 @@ const plantController = {
             });
 
             if (!account) {
-                return res.send({
+                return res.status(400).send({
                     result: "failed",
-                    message: "Không đủ quyền truy cập",
+                    reason: "Không đủ quyền truy cập",
                 });
             }
 
@@ -153,7 +153,7 @@ const plantController = {
         } catch (error) {
             res.status(404).json({
                 result: "failed",
-                message: error.message,
+                reason: error.message,
             });
         }
     },
@@ -168,9 +168,9 @@ const plantController = {
             });
 
             if (!account) {
-                return res.send({
+                return res.status(400).send({
                     result: "failed",
-                    message: "Không đủ quyền truy cập",
+                    reason: "Không đủ quyền truy cập",
                 });
             }
 
@@ -217,7 +217,7 @@ const plantController = {
         } catch (error) {
             res.status(404).json({
                 result: "failed",
-                message: error.message,
+                reason: error.message,
             });
         }
     },
@@ -234,7 +234,7 @@ const plantController = {
             if (!account) {
                 return res.status(403).send({
                     result: "failed",
-                    message: "Không đủ quyền truy cập",
+                    reason: "Không đủ quyền truy cập",
                 });
             }
 
@@ -281,7 +281,7 @@ const plantController = {
         } catch (error) {
             res.status(404).json({
                 result: "failed",
-                message: error.message,
+                reason: error.message,
             });
         }
     },
@@ -311,7 +311,7 @@ const plantController = {
         } catch (error) {
             res.status(404).json({
                 result: "failed",
-                message: error.message,
+                reason: error.message,
             });
         }
     },
@@ -328,7 +328,7 @@ const plantController = {
             if (!account) {
                 return res.status(403).send({
                     result: "failed",
-                    message: "Không đủ quyền truy cập",
+                    reason: "Không đủ quyền truy cập",
                 });
             }
 
@@ -348,7 +348,7 @@ const plantController = {
         } catch (error) {
             res.status(400).json({
                 result: "failed",
-                message: error.message,
+                reason: error.message,
             });
         }
     },
@@ -364,9 +364,9 @@ const plantController = {
             });
 
             if (!account) {
-                return res.send({
+                return res.status(400).send({
                     result: "failed",
-                    message: "Không đủ quyền truy cập",
+                    reason: "Không đủ quyền truy cập",
                 });
             }
 
@@ -391,13 +391,13 @@ const plantController = {
             } else {
                 res.status(400).json({
                     result: "failed",
-                    message: "Ban công không tồn tại",
+                    reason: "Ban công không tồn tại",
                 });
             }
         } catch (error) {
             res.status(400).json({
                 result: "failed",
-                message: error.message,
+                reason: error.message,
             });
         }
     },
@@ -411,9 +411,9 @@ const plantController = {
             });
 
             if (!account) {
-                return res.send({
+                return res.status(400).send({
                     result: "failed",
-                    message: "Không đủ quyền truy cập",
+                    reason: "Không đủ quyền truy cập",
                 });
             }
             await Plant.findByIdAndDelete(_id);
@@ -423,7 +423,7 @@ const plantController = {
         } catch (error) {
             res.status(400).json({
                 result: "failed",
-                message: error.message,
+                reason: error.message,
             });
         }
     },

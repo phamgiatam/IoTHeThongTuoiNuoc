@@ -14,16 +14,16 @@ const balconyController = {
             });
 
             if (!account) {
-                return res.send({
+                return res.status(400).send({
                     result: "failed",
-                    message: "Không đủ quyền truy cập",
+                    reason: "Không đủ quyền truy cập",
                 });
             }
 
             if (balcony) {
-                return res.send({
+                return res.status(400).send({
                     result: "failed",
-                    message: "Tên ban công đã tồn tại",
+                    reason: "Tên ban công đã tồn tại",
                 });
             } else {
                 const newBalcony = new Balcony({
@@ -44,7 +44,7 @@ const balconyController = {
         } catch (error) {
             res.status(500).send({
                 result: "failed",
-                message: error.message,
+                reason: error.message,
             });
         }
     },
@@ -56,9 +56,9 @@ const balconyController = {
             });
 
             if (!account) {
-                return res.send({
+                return res.status(400).send({
                     result: "failed",
-                    message: "Không đủ quyền truy cập",
+                    reason: "Không đủ quyền truy cập",
                 });
             }
 
@@ -69,9 +69,9 @@ const balconyController = {
                 balconies: balconies,
             });
         } catch (error) {
-            res.send({
+            res.status(400).send({
                 result: "failed",
-                message: error.message,
+                reason: error.message,
             });
         }
     },
@@ -87,7 +87,7 @@ const balconyController = {
             if (!account) {
                 return res.status(403).send({
                     result: "failed",
-                    message: "Không đủ quyền truy cập",
+                    reason: "Không đủ quyền truy cập",
                 });
             }
 
@@ -99,7 +99,7 @@ const balconyController = {
         } catch (error) {
             res.status(404).send({
                 result: "failed",
-                message: error.message,
+                reason: error.message,
             });
         }
     },
@@ -115,7 +115,7 @@ const balconyController = {
             if (!account) {
                 return res.status(403).send({
                     result: "failed",
-                    message: "Không đủ quyền truy cập",
+                    reason: "Không đủ quyền truy cập",
                 });
             }
 
@@ -134,7 +134,7 @@ const balconyController = {
         } catch (error) {
             res.status(404).send({
                 result: "failed",
-                message: error.message,
+                reason: error.message,
             });
         }
     },
@@ -150,7 +150,7 @@ const balconyController = {
             if (!account) {
                 return res.status(403).send({
                     result: "failed",
-                    message: "Không đủ quyền truy cập",
+                    reason: "Không đủ quyền truy cập",
                 });
             }
 
@@ -161,7 +161,7 @@ const balconyController = {
         } catch (error) {
             res.status(404).send({
                 result: "failed",
-                message: error.message,
+                reason: error.message,
             });
         }
     },
