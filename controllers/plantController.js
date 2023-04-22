@@ -21,7 +21,11 @@ const plantController = {
             });
 
             if (!account) {
+<<<<<<< Updated upstream
                 return res.status(400).send({
+=======
+                return res.status(401).json({
+>>>>>>> Stashed changes
                     result: "failed",
                     reason: "Không đủ quyền truy cập",
                 });
@@ -125,7 +129,11 @@ const plantController = {
             });
 
             if (!account) {
+<<<<<<< Updated upstream
                 return res.status(400).send({
+=======
+                return res.status(401).json({
+>>>>>>> Stashed changes
                     result: "failed",
                     reason: "Không đủ quyền truy cập",
                 });
@@ -168,7 +176,11 @@ const plantController = {
             });
 
             if (!account) {
+<<<<<<< Updated upstream
                 return res.status(400).send({
+=======
+                return res.status(401).json({
+>>>>>>> Stashed changes
                     result: "failed",
                     reason: "Không đủ quyền truy cập",
                 });
@@ -364,7 +376,11 @@ const plantController = {
             });
 
             if (!account) {
+<<<<<<< Updated upstream
                 return res.status(400).send({
+=======
+                return res.status(401).json({
+>>>>>>> Stashed changes
                     result: "failed",
                     reason: "Không đủ quyền truy cập",
                 });
@@ -411,7 +427,11 @@ const plantController = {
             });
 
             if (!account) {
+<<<<<<< Updated upstream
                 return res.status(400).send({
+=======
+                return res.status(401).json({
+>>>>>>> Stashed changes
                     result: "failed",
                     reason: "Không đủ quyền truy cập",
                 });
