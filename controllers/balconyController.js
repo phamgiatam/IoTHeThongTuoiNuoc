@@ -14,11 +14,7 @@ const balconyController = {
             });
 
             if (!account) {
-<<<<<<< Updated upstream
-                return res.status(400).send({
-=======
-                return res.status(401).json({
->>>>>>> Stashed changes
+                return res.status(401).send({
                     result: "failed",
                     reason: "Không đủ quyền truy cập",
                 });
@@ -60,11 +56,7 @@ const balconyController = {
             });
 
             if (!account) {
-<<<<<<< Updated upstream
-                return res.status(400).send({
-=======
-                return res.status(401).json({
->>>>>>> Stashed changes
+                return res.status(401).send({
                     result: "failed",
                     reason: "Không đủ quyền truy cập",
                 });
@@ -93,7 +85,7 @@ const balconyController = {
             });
 
             if (!account) {
-                return res.status(403).send({
+                return res.status(401).send({
                     result: "failed",
                     reason: "Không đủ quyền truy cập",
                 });
@@ -121,7 +113,7 @@ const balconyController = {
             });
 
             if (!account) {
-                return res.status(403).send({
+                return res.status(401).send({
                     result: "failed",
                     reason: "Không đủ quyền truy cập",
                 });
@@ -156,7 +148,7 @@ const balconyController = {
             });
 
             if (!account) {
-                return res.status(403).send({
+                return res.status(401).send({
                     result: "failed",
                     reason: "Không đủ quyền truy cập",
                 });
