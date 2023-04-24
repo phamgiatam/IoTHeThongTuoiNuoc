@@ -16,7 +16,7 @@ const accountController = {
                     accessToken: accessToken,
                 });
                 if (!account) {
-                    return res.status(400).send({
+                    return res.status(401).send({
                         result: "failed",
                         reason: "Không đủ quyền truy cập",
                     });
