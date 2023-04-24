@@ -158,7 +158,7 @@ const balconyController = {
             if (!account) {
               return res.status(401).send({
                 result: "failed",
-                reason: "Invalid access token",
+                reason: "Không đủ quyền truy cập",
               });
             }
           } catch (error) {
