@@ -141,8 +141,7 @@ const balconyController = {
     delete: async (req, res) => {
         try {
           const { balconyId } = req.query;
-          
-          // Check for valid input
+      
           if (!balconyId) {
             return res.status(400).send({
               result: "failed",
@@ -151,8 +150,7 @@ const balconyController = {
           }
       
           const accessToken = req.headers.authorization?.split(" ")[1];
-          
-          // Use try-catch for authentication
+      
           try {
             const account = await Account.findOne({ accessToken });
             if (!account) {
@@ -168,7 +166,7 @@ const balconyController = {
             });
           }
       
-          await Balcony.findByIdAndDelete(balconyId);
+          await Balcony.findOneAndDelete({ balconyId: balconyId });
       
           res.status(200).send({
             result: "success",
@@ -179,8 +177,7 @@ const balconyController = {
             reason: error.message,
           });
         }
-      },
-      
+      },         
 };
 
 module.exports = balconyController;
