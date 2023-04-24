@@ -140,31 +140,47 @@ const balconyController = {
     },
     delete: async (req, res) => {
         try {
-            const { balconyId } = req.query;
-
-            const accessToken = req.headers.authorization.split(" ")[1];
-            const account = await Account.findOne({
-                accessToken: accessToken,
+          const { balconyId } = req.query;
+          
+          // Check for valid input
+          if (!balconyId) {
+            return res.status(400).send({
+              result: "failed",
+              reason: "Missing balconyId parameter",
             });
-
+          }
+      
+          const accessToken = req.headers.authorization?.split(" ")[1];
+          
+          // Use try-catch for authentication
+          try {
+            const account = await Account.findOne({ accessToken });
             if (!account) {
-                return res.status(403).send({
-                    result: "failed",
-                    reason: "Không đủ quyền truy cập",
-                });
-            }
-
-            await Balcony.findOneAndDelete({ balconyId: balconyId });
-            res.status(200).send({
-                result: "success",
-            });
-        } catch (error) {
-            res.status(404).send({
+              return res.status(401).send({
                 result: "failed",
-                reason: error.message,
+                reason: "Invalid access token",
+              });
+            }
+          } catch (error) {
+            return res.status(500).send({
+              result: "failed",
+              reason: error.message,
             });
+          }
+      
+          await Balcony.findByIdAndDelete(balconyId);
+      
+          res.status(200).send({
+            result: "success",
+          });
+        } catch (error) {
+          res.status(404).send({
+            result: "failed",
+            reason: error.message,
+          });
         }
-    },
+      },
+      
 };
 
 module.exports = balconyController;
