@@ -119,6 +119,20 @@ const balconyController = {
                 });
             }
 
+            // Check if a balcony with the given name already exists
+            const existingBalcony = await Balcony.findOne({
+                name: name,
+                account: account._id,
+                balconyId: { $ne: balconyId }, // Exclude the current balcony being updated
+            });
+
+            if (existingBalcony) {
+                return res.status(400).send({
+                    result: "failed",
+                    reason: "Tên ban công đã tồn tại",
+                });
+            }
+
             const balcony = await Balcony.findOneAndUpdate(
                 { balconyId: balconyId },
                 {
