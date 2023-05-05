@@ -32,8 +32,14 @@ const plantController = {
                 JSON.stringify({
                     flag: 0,
                     requestCode: parseInt(requestCode),
-                    plantId: parseInt(plantId.slice(-1)),
-                    balconyId: plantId.slice(0, plantId.length - 1),
+                    plantId:
+                        parseInt(plantId.slice(17, 19)) > 9
+                            ? parseInt(plantId.slice(-2))
+                            : parseInt(plantId.slice(-1)),
+                    balconyId:
+                        parseInt(plantId.slice(-1)) > 9
+                            ? plantId.slice(0, plantId.length - 2)
+                            : plantId.slice(0, plantId.length - 1),
                 }),
                 (err) => {
                     if (err) {
@@ -181,8 +187,14 @@ const plantController = {
                 JSON.stringify({
                     flag: 1,
                     autoMode: autoMode,
-                    plantId: parseInt(plantId.slice(-1)),
-                    balconyId: plantId.slice(0, plantId.length - 1),
+                    plantId:
+                        parseInt(plantId.slice(17, 19)) > 9
+                            ? parseInt(plantId.slice(-2))
+                            : parseInt(plantId.slice(-1)),
+                    balconyId:
+                        parseInt(plantId.slice(-1)) > 9
+                            ? plantId.slice(0, plantId.length - 2)
+                            : plantId.slice(0, plantId.length - 1),
                     soilMoistureBreakpoint: plant.soilMoistureBreakpoint,
                 }),
                 (err) => {
@@ -248,8 +260,14 @@ const plantController = {
                 JSON.stringify({
                     flag: 2,
                     autoMode: plant.autoMode,
-                    plantId: parseInt(plantId.slice(-1)),
-                    balconyId: plantId.slice(0, plantId.length - 1),
+                    plantId:
+                        parseInt(plantId.slice(17, 19)) > 9
+                            ? parseInt(plantId.slice(-2))
+                            : parseInt(plantId.slice(-1)),
+                    balconyId:
+                        parseInt(plantId.slice(-1)) > 9
+                            ? plantId.slice(0, plantId.length - 2)
+                            : plantId.slice(0, plantId.length - 1),
                     soilMoistureBreakpoint: soilMoistureBreakpoint,
                 }),
                 (err) => {
