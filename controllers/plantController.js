@@ -10,6 +10,32 @@ const options = {};
 const client = mqtt.connect(broker, options);
 
 const plantController = {
+    // create: async (req, res) => {
+    //     try {
+    //         const plants = await Plant.find({ balconyId: "EC:FA:BC:28:0E:66" });
+    //         // const plant = plants.find((item) => {
+    //         //     console.log(item.plantId);
+    //         //     return item.plantId === "EC:FA:BC:28:0E:660";
+    //         // });
+    //         // console.log(plant);
+    //         let testArr = [];
+    //         for (let i = 0; i < 15; i++) {
+    //             const havePlant = plants.find((item) => {
+    //                 return item.plantId == `EC:FA:BC:28:0E:66${i}`;
+    //             });
+    //             testArr = testArr.concat(havePlant);
+    //         }
+    //         res.send({
+    //             plants: plants,
+    //             havePlant: testArr,
+    //         });
+    //     } catch (error) {
+    //         res.status(404).json({
+    //             result: "failed",
+    //             message: error.message,
+    //         });
+    //     }
+    // },
 
     control: async (req, res) => {
         try {
@@ -37,7 +63,7 @@ const plantController = {
                             ? parseInt(plantId.slice(-2))
                             : parseInt(plantId.slice(-1)),
                     balconyId:
-                        parseInt(plantId.slice(-1)) > 9
+                        parseInt(plantId.slice(17, 19)) > 9
                             ? plantId.slice(0, plantId.length - 2)
                             : plantId.slice(0, plantId.length - 1),
                 }),
@@ -65,7 +91,12 @@ const plantController = {
 
     updateData: async (data) => {
         try {
-            const { balconyId, enviromentTemperature, enviromentHumidity, sensorArr } = data;
+            const {
+                balconyId,
+                enviromentTemperature,
+                enviromentHumidity,
+                sensorArr,
+            } = data;
             const balcony = await Balcony.findOne({ balconyId: balconyId });
             if (balcony) {
                 await balcony.updateOne({
@@ -180,7 +211,10 @@ const plantController = {
                 });
             }
 
-            const plant = await Plant.findOneAndUpdate({ plantId: plantId }, { autoMode: autoMode });
+            const plant = await Plant.findOneAndUpdate(
+                { plantId: plantId },
+                { autoMode: autoMode }
+            );
 
             client.publish(
                 topic,
@@ -192,7 +226,7 @@ const plantController = {
                             ? parseInt(plantId.slice(-2))
                             : parseInt(plantId.slice(-1)),
                     balconyId:
-                        parseInt(plantId.slice(-1)) > 9
+                        parseInt(plantId.slice(17, 19)) > 9
                             ? plantId.slice(0, plantId.length - 2)
                             : plantId.slice(0, plantId.length - 1),
                     soilMoistureBreakpoint: plant.soilMoistureBreakpoint,
@@ -218,7 +252,9 @@ const plantController = {
                 res.status(200).json({
                     result: "success",
                     plant: plant,
-                    message: `Chế độ tự động đã được ${autoMode ? "bật" : "tắt"} đối với cây ${plantId}`,
+                    message: `Chế độ tự động đã được ${
+                        autoMode ? "bật" : "tắt"
+                    } đối với cây ${plantId}`,
                 });
             } else {
                 res.status(200).json({
@@ -265,7 +301,7 @@ const plantController = {
                             ? parseInt(plantId.slice(-2))
                             : parseInt(plantId.slice(-1)),
                     balconyId:
-                        parseInt(plantId.slice(-1)) > 9
+                        parseInt(plantId.slice(17, 19)) > 9
                             ? plantId.slice(0, plantId.length - 2)
                             : plantId.slice(0, plantId.length - 1),
                     soilMoistureBreakpoint: soilMoistureBreakpoint,
@@ -389,6 +425,15 @@ const plantController = {
             }
 
             const balcony = await Balcony.findOne({ balconyId: balconyId });
+            const checkedPlant = await Plant.findOne({
+                plantId: balconyId + plantOrder,
+            });
+            if (checkedPlant) {
+                return res.status(400).send({
+                    result: "failed",
+                    message: "Chân tưới đã tồn tại",
+                });
+            }
             if (balcony) {
                 const newPlant = new Plant({
                     balconyId: balconyId,
