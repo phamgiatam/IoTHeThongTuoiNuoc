@@ -1,5 +1,6 @@
 const Account = require("../models/Account");
 const Balcony = require("../models/Balcony");
+const Plant = require("../models/Plant");
 
 const balconyController = {
     createBalcony: async (req, res) => {
@@ -181,6 +182,7 @@ const balconyController = {
           }
       
           await Balcony.findOneAndDelete({ balconyId: balconyId });
+          await Plant.deleteMany({ balconyId: balconyId });
       
           res.status(200).send({
             result: "success",
