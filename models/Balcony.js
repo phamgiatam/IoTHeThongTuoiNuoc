@@ -2,18 +2,16 @@ const mongoose = require("mongoose");
 
 const balcony = new mongoose.Schema(
     {
-        balconyId: String,
-        plantId: String,
+        account: { type: mongoose.Schema.Types.ObjectId, ref: "account" },
         name: String,
-        soilMoisture: Number,
-        autoMode: Boolean,
-        envTemp: Number,
-        envHumi: Number,
-        soilMoistureBreakpoint: Number,
-        status: String,
+        humidity: Number,
+        temperature: Number,
+        balconyId: String,
         image: String,
     },
-    { timestamps: true }
+    {
+        timestamps: true,
+    }
 );
 
 module.exports = mongoose.model("balcony", balcony);
